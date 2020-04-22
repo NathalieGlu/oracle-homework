@@ -1,6 +1,7 @@
 create or replace package product_pack is
 
-    type t_product is record (
+    -- типы
+    type t_product is record (            -- информация о продукте
         name product.p_name%type,
         quantity product.p_quantity%type,
         price product.p_price%type
@@ -18,13 +19,27 @@ create or replace package product_pack is
     c_error_msg_price_negative constant varchar2(200 char) := 'Price must be positive';
     c_error_msg_change_forbidden constant varchar2(200 char) := 'Manual change is forbidden';
 
-    function add_product(pi_product t_product) return product.p_id%type;
+    -- добавление продукта
+    function add_product(
+        pi_product t_product    -- продукт
+    ) return product.p_id%type;
 
-    procedure change_quantity(pi_id in product.p_id%type, pi_quantity in product.p_quantity%type);
+    -- изменение количества продукта
+    procedure change_quantity(
+        pi_id in product.p_id%type               -- id продукта
+        , pi_quantity in product.p_quantity%type -- количество, на которое уменьшается
+    );
 
-    procedure change_price(pi_id in product.p_id%type, pi_price in product.p_price%type);
+    -- изменение цены продукта
+    procedure change_price(
+        pi_id in product.p_id%type         -- id продукта
+        , pi_price in product.p_price%type -- цена продукта
+    );
 
-    procedure delete_product(pi_id in product.p_id%type);
+    -- удаление продукта
+    procedure delete_product(
+        pi_id in product.p_id%type -- id продукта
+    );
 
     -- тело триггера
     procedure restrict_trigger_body;

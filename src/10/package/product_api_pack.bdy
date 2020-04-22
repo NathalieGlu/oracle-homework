@@ -2,7 +2,9 @@ create or replace package body product_pack is
 
     g_is_api boolean := false;
 
-    function add_product(pi_product t_product)
+    function add_product(
+        pi_product t_product -- продукт
+    )
         return product.p_id%type
         is
         v_product_id product.p_id%type;
@@ -19,7 +21,10 @@ create or replace package body product_pack is
             raise;
     end;
 
-    procedure change_quantity(pi_id in product.p_id%type, pi_quantity in product.p_quantity%type)
+    procedure change_quantity(
+        pi_id in product.p_id%type               -- id продукта
+        , pi_quantity in product.p_quantity%type -- количество, на которое уменьшается
+    )
         is
         v_quantity product.p_quantity%type;
     begin
@@ -41,7 +46,10 @@ create or replace package body product_pack is
             raise;
     end;
 
-    procedure change_price(pi_id in product.p_id%type, pi_price in product.p_price%type)
+    procedure change_price(
+        pi_id in product.p_id%type         -- id продукта
+        , pi_price in product.p_price%type -- цена продукта
+    )
         is
         v_price product.p_price%type;
     begin
@@ -63,7 +71,9 @@ create or replace package body product_pack is
             raise;
     end;
 
-    procedure delete_product(pi_id in product.p_id%type)
+    procedure delete_product(
+        pi_id in product.p_id%type -- id продукта
+    )
         is
     begin
         if pi_id is null
