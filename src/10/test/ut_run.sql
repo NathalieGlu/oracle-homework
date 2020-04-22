@@ -1,0 +1,1 @@
+select * from table (ut.run('test_product_pack'));
